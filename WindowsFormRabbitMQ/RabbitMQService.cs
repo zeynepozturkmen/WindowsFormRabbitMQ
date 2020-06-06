@@ -14,8 +14,11 @@ namespace WindowsFormRabbitMQ
 
         public IConnection GetRabbitMQConnection()
         {
+
             ConnectionFactory connectionFactory = new ConnectionFactory()
             {
+                //Yukarıdaki satır ile açmış olduğumuz connection üzerinden “CreateModel” method’unu çağırarak, RabbitMQ üzerinde yeni bir channel/session yaratmaktayız. Bu Channel sayesinde bir Queue oluşturabilirken, mesaj gönderme işlemlerini de gerçekleştirebilmekteyiz.
+
                 // RabbitMQ'nun bağlantı kuracağı host'u tanımlıyoruz. Herhangi bir güvenlik önlemi koymak istersek, Management ekranından password adımlarını tanımlayıp factory içerisindeki "UserName" ve "Password" property'lerini set etmemiz yeterlidir.
                 HostName = _hostName
             };

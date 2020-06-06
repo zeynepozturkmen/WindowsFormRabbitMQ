@@ -17,6 +17,8 @@ namespace WindowsFormRabbitMQ
             InitializeComponent();
         }
 
+        //Queue ismini “ZEYNEPOZTURKMEN” olarak belirleyelim ve constructor üzerinden Queue ismini ve göndermek istediğimiz mesajı set edelim. Uygulamayı çalıştırmadan önce RabbitMQ Management ekranı üzerinden Queues tab’ına bir bakalım. Management ekranına “localhost:15672” adresinden erişebilirsiniz.
+
         private static readonly string _queueName = "ZEYNEPOZTURKMEN";
         private static Publisher _publisher;
 

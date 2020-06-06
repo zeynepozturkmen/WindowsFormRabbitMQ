@@ -18,13 +18,18 @@ namespace WindowsFormRabbitMQ
 
             using (var connection = _rabbitMQService.GetRabbitMQConnection())
             {
+                //Bu satırda ise method isminden de anlaşılabileceği üzere, yeni bir queue tanımlıyoruz
+                //
                 using (var channel = connection.CreateModel())
                 {
                     channel.QueueDeclare(queueName, false, false, false, null);
+                    //queue: Oluşturulacak olan Queue’nun ismi.
+                    //durable: Bu parametre ile in-memory olarak çalışan Queue disk üzerinden çalışmaya başlayacaktır.Bu sayede RabbitMQ servisi dursa bile Queue kaybolmayacaktır. Her güzelliğin getirdiği bir kötü tarafın olduğu gibi bununda beraberinde getireceği latency problemi bulunmaktadır haliyle.
 
                     channel.BasicPublish("", queueName, null, Encoding.UTF8.GetBytes(message));
-
-                    //Console.WriteLine("{0} queue'su üzerine, \"{1}\" mesajı yazıldı.", queueName, message);
+                    //“BasicPublish” method’u ile kolay bir şekilde oluşturmuş olduğumuz ilgili Queue’ya mesaj gönderiyoruz.
+                    //routingKey: Burada girmiş olduğumuz key’e göre ilgili Queue’ya yönlendirilecektir mesaj.
+                    //body: Queue’ya göndermek istediğimiz mesajı byte[] tipinde gönderiyoruz.
                 }
             }
         }
